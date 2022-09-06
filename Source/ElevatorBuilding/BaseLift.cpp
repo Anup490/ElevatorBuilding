@@ -84,7 +84,7 @@ void ABaseLift::StopLift()
 bool ABaseLift::HasFloors()
 {
 	ABaseGameModeBase* GameMode = Cast<ABaseGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-	return GameMode->FloorCounter >= 0;
+	return TargetFloor <= GameMode->FloorCounter;
 }
 
 void ABaseLift::PrepareLift()
@@ -96,7 +96,7 @@ void ABaseLift::PrepareLift()
 bool ABaseLift::HasBasements()
 {
 	ABaseGameModeBase* GameMode = Cast<ABaseGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-	return GameMode->BasementCounter >= 0;
+	return (TargetFloor * -1) <= GameMode->BasementCounter;
 }
 
 void ABaseLift::HandleLiftMovement()
@@ -138,10 +138,10 @@ void ABaseLift::OnPlayerExit(AActor* Actor)
 
 void ABaseLift::OnGo(int Floor)
 {
-	if ((CurrentFloor != Floor) && (HasFloors() || HasBasements()))
+	if ((CurrentFloor != Floor) && ((HasFloors()) || HasBasements()))
 	{
 		ABaseGameModeBase* GameMode = Cast<ABaseGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-		if ((Floor >= 0 && Floor <= GameMode->FloorCounter) || ((Floor * -1) <= GameMode->BasementCounter))
+		if ((Floor >= 0 && Floor <= GameMode->FloorCounter) || (Floor < 0 && ((Floor * -1) <= GameMode->BasementCounter)))
 		{
 			TargetFloor = Floor;
 			PrepareLift();

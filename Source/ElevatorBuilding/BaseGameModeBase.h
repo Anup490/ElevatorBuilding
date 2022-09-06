@@ -34,10 +34,10 @@ protected:
 	void SpawnLowerBasements(int Count, UClass* Type);
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int FloorCounter;
+	int FloorCounter = 0;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int BasementCounter;
+	int BasementCounter = 0;
 
 	UFUNCTION(BlueprintCallable)
 	void ClearFloors();

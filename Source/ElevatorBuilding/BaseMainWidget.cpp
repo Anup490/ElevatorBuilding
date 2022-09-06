@@ -15,30 +15,26 @@ void UBaseMainWidget::OnFloorCommit(UTextBlock* FloorErrorText, FText FloorCount
 {
 	FString FloorCountString = FloorCountText.ToString();
 	int FloorCount = FCString::Atoi(*FloorCountString);
-	if (FloorCount >= 0 && FloorCount < 6)
+	if (FloorCount >= 0)
 	{
 		Floors = FloorCount;
 		SetColorAndText(FloorErrorText, FLinearColor(0.0, 1.0, 0.0), "Value is acceptable");
 	}
-	else if (FloorCount < 0)
-		SetColorAndText(FloorErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be positive");
 	else
-		SetColorAndText(FloorErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be less than 6");
+		SetColorAndText(FloorErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be positive");
 }
 
 void UBaseMainWidget::OnBasementCommit(UTextBlock* BasementErrorText, FText BasementCountText)
 {
 	FString BasementCountString = BasementCountText.ToString();
 	int BasementCount = FCString::Atoi(*BasementCountString);
-	if (BasementCount >= 0 && BasementCount < 6)
+	if (BasementCount >= 0)
 	{
 		Basements = BasementCount;
 		SetColorAndText(BasementErrorText, FLinearColor(0.0, 1.0, 0.0), "Value is acceptable");
 	}
-	else if (BasementCount < 0)
-		SetColorAndText(BasementErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be positive");
 	else
-		SetColorAndText(BasementErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be less than 6");
+		SetColorAndText(BasementErrorText, FLinearColor(1.0, 0.0, 0.0), "Value must be positive");
 }
 
 void UBaseMainWidget::SetColorAndText(UTextBlock* FloorErrorText, FLinearColor&& Color, FString&& Text)
