@@ -26,6 +26,6 @@ void ABaseLevel::SetFloorValues(int Value, FString Type, UTextRenderComponent* T
 	Floor = Value;
 	if (Value < 0) Value *= -1;
 	Type.AppendInt(Value);
-	TextRender->SetText(Type);
+	TextRender->SetText(FText::FromString(Type));
 }
 
